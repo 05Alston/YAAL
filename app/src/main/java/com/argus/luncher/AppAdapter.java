@@ -1,11 +1,13 @@
 package com.argus.luncher;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -46,11 +48,22 @@ public class AppAdapter extends BaseAdapter {
             v = convertView;
         }
 
+        LinearLayout mLayout = v.findViewById(R.id.AppLayout);
         ImageView mImage = v.findViewById(R.id.AppImage);
         TextView mLabel = v.findViewById(R.id.AppLabel);
 
         mImage.setImageDrawable(appList.get(position).getIcon());
         mLabel.setText(appList.get(position).getName());
+
+        mLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent launchAppIntent =
+                        context.getPackageManager().getLaunchIntentForPackage(appList.get(position).getPackageName());
+                if(launchAppIntent != null)
+                    context.startActivity(launchAppIntent);
+            }
+        });
         return v;
     }
 }
