@@ -2,6 +2,7 @@ package com.argus.luncher;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
@@ -17,12 +18,29 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+
+    boolean isBottom = true;
+    ViewPager mViewPager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        initialiseHome();
         initialiseDrawer();
+    }
+
+    private void initialiseHome() {
+
+        ArrayList<PagerObject> pagerAppList = new ArrayList<>();
+        ArrayList<AppObject> appList = new ArrayList<>();
+        for (int i = 0; i < 20; i++)
+            appList.add(new AppObject("", "",
+                    getResources().getDrawable(R.drawable.ic_launcher_background)));
+
+        pagerAppList.add(new PagerObject(appList));
+        mViewPager = findViewById(R.id.ViewPager);
+        mViewPager.setAdapter(new ViewPagerAdapter(this, pagerAppList));
     }
 
 
