@@ -1,4 +1,4 @@
-# Luncher
+# Yet Another Android Launcher
 
 1. App Launching:
     - Use intents to launch other applications installed on the device. You can create a list of installed applications and handle their launching when the user selects them.
